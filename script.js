@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const today = new Date();
   const lastWeek = new Date();
   lastWeek.setDate(today.getDate() - 7); // Subtract 7 days to get last week's date
-
-  
   flatpickr(fromDateInput, {
      dateFormat: 'm/d/Y',
     defaultDate: lastWeek, // Set default "from" date to last week
@@ -16,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
       toDateInput._flatpickr.show();
     }
   });
-
   flatpickr(toDateInput, {
     dateFormat: 'm/d/Y',
 	defaultDate: today, // Set default "to" date to today
@@ -24,11 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Selected "To" Date:', dateStr);
     }
   });
-  
   submitButton.addEventListener('click', function() {
     const value1 = input1.value;
     const value2 = input2.value;
-
     console.log('Input 1:', value1);
     console.log('Input 2:', value2);
   });
