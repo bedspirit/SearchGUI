@@ -18,42 +18,48 @@
 <body>
   <div class="container">
 	  <div class="components">
-	  <div class="input-group">
+		<div class="but_input-group">
 		<div class="search">
 		  <input type="text" class="search__input" id="searchFor" placeholder="Search For...">
 		  <div class="search__icon">
 			<ion-icon name="search"></ion-icon>
 		  </div>
 		</div>
-		<div class="spacer"></div>
-		<div class="btnSmall btnSmall__primary">
+		<div class="btnSmall btnSmall__primary" id="andButton">
 			<p>And</p>
 		</div>
-	  </div>
-
-	<div class="search">
-	  <input type="text" class="search__input" id="fileName" placeholder="...File Name">
-	  <div class="search__icon">
-		<ion-icon name="search"></ion-icon>
-	  </div>
+		</div>
+	<div class="but_input-group">
+		<div class="search">
+		  <input type="text" class="search__input" id="fileName" placeholder="...File Name">
+		  <div class="search__icon">
+			<ion-icon name="search"></ion-icon>
+		  </div>
+		</div>
+		<div class="btnSmall btnSmall__primary" id="orButton">
+			<p>Or</p>
+		</div>
 	</div>
-		
-		<div class="input-group">
-			<label for="fromDate">From</label>
-			<input type="text" id="fromDate" placeholder="From Date">
+	<div class="but_input-group">
+		<div class=dateP>
+			<input type="text" class="dateP__input" id="fromDate">
 		</div>
-		
-		<div class="input-group">
-			<label for="toDate">To</label>
-			<input type="text" id="toDate" placeholder="To Date">
-		</div>
-		
+		<label for="toDate">To</label>
+		  <style>
+			label {
+			  font-size: 16px; /* Font size in pixels */
+			  font-family: Poppins, sans-serif; /* Font type */
+			  color: #9baacf;
+			}
+		  </style>
+		<div class=dateP>
+			<input type="text" class="dateP__input" id="toDate">
+		</div>	
+	</div>
 		<div class="btn btn__primary">
 			<p>Search</p>
 		</div>
-		
 	  </div>	
   </div>
-  
 </body>
 </html>
