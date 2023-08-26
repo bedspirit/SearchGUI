@@ -249,3 +249,32 @@ inset -.2rem -.2rem .5rem var(--white);
 .linkButton__primary p {
   font-size: 1.2rem;
 }
+.date_size {
+  display: flex;
+  align-items: center;
+}
+.date_size__dateResult {
+	box-shadow: .3rem .3rem .6rem var(--greyLight-2),
+              -.2rem -.2rem .5rem var(--white);
+    width: 5rem;
+    height: 2rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+.date_size__sizeResult {
+	box-shadow: .3rem .3rem .6rem var(--greyLight-2),
+              -.2rem -.2rem .5rem var(--white);
+    width: 5rem;
+    height: 2rem;
+    font-size: 1rem;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .5s ease;
+	margin-left: auto;
+}
