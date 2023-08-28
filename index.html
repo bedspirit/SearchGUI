@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.js"></script>
-  <script src="https://kit.fontawesome.com/f0601b0fb2.js" crossorigin="anonymous"></script>
   <script type='module' src='https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js'></script>
   <script nomodule='' src='https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js'></script>
   <script src="script.js"></script>
@@ -58,46 +57,8 @@
 			</div>
 			<div class="btn btn__primary" id="searchButton">
 				<p>Search</p>
-			</div>
-			
-			<div id="searchResultsItems" class="hidden">
-				<div class="searchResults" id="result1">
-					<div class="linkButton linkButton__primary" id="linkBut1">
-						<p>Link Test</p>
-					</div>
-					<div class="date_size" id="dateResultGroup1">
-						<div class="date_size__dateResult" id="dateResult1">
-							<p>Date1</p>
-						</div>
-						<div class="date_size__sizeResult" id="sizeResult1">
-							<p>Size1</p>
-						</div>
-					</div>
-					<div class="preview" id="preview1">
-						<p>A snippet of the file where the searched term appears will be here</p>
-					</div>
-				</div>
-			</div>
-			
-			<div id="searchResultsItems2" class="hidden">
-				<div class="searchResults" id="result2">
-					<div class="linkButton linkButton__primary" id="linkBut2">
-						<p>Link Test 2</p>
-					</div>
-						<div class="date_size" id="dateResultGroup2">
-						<div class="date_size__dateResult" id="dateResult2">
-							<p>Date2</p>
-						</div>
-						<div class="date_size__sizeResult" id="sizeResult2">
-							<p>Size2</p>
-						</div>
-					</div>
-					<div class="preview" id="preview2">
-						<p>A snippet of the file where the searched term appears will be here</p>
-					</div>
-				</div>
-			</div>
-			
+			</div>			
+			<div id="searchResultsItems"></div>			
 		</div>
 	</div>
 </body>
