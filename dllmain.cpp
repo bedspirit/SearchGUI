@@ -3,13 +3,14 @@
 #include <iostream>
 #include <filesystem>
 #include <sys/stat.h>
+#include <fstream>
 
 using namespace std;
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+BOOL APIENTRY DllMain(HMODULE hModule,
+    DWORD  ul_reason_for_call,
+    LPVOID lpReserved
+)
 {
     switch (ul_reason_for_call)
     {
@@ -23,6 +24,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 vector <string> searchResults;
+
 bool sCheck;
 
 int dateYearToIntSearch(string t_Date) { //this converts the last 4 digits of the date (the year) to an int for comparisons
@@ -50,11 +52,57 @@ int dateFullDateYearToIntSearch(string t_Date) { //this converts the date to int
     dateFullDateYear = (t_Date[4] - 48) * 10000000 + (t_Date[5] - 48) * 1000000 + (t_Date[6] - 48) * 100000 + (t_Date[7] - 48) * 10000 + (t_Date[0] - 48) * 1000 + (t_Date[1] - 48) * 100 + (t_Date[2] - 48) * 10 + t_Date[3] - 48;
     return dateFullDateYear;
 }
+void LoadSearchResults(string t_fileName, string t_searchData) {
+    //cout << "loaded" << endl;
+    ifstream inFS;
+    string dataFromFile = "notNull";
+    int offset;
+    vector<string> splitSearch;
+    size_t found;
+    int sResult = 0;
+    string token;
+    string fileName = t_fileName;
 
+    transform(t_searchData.begin(), t_searchData.end(), t_searchData.begin(), ::tolower);
+    istringstream tokenStream(t_searchData);
+    while (getline(tokenStream, token, ';'))
+    {
+        splitSearch.push_back(token);
+    }
+    for (unsigned i = 0; i < splitSearch.size(); i++) {
+        inFS.open(t_fileName);
+        ifstream file(t_fileName);
+        sCheck = false;
+        while (getline(file, dataFromFile)) {
+            transform(dataFromFile.begin(), dataFromFile.end(), dataFromFile.begin(), ::tolower);
+            found = dataFromFile.find(splitSearch[i]);
+            if (found != string::npos) {
+                sCheck = true;
+                sResult = sResult + 1;
+                break;
+            }
 
-string searchOutput(string f_DateFrom, string f_DateTo, string f_FileName) {
+        }
+        inFS.close(); // Done with file, so close it
+        if (sCheck == false) {
+            break;
+        }
+    }
+    if (sResult == splitSearch.size()) {
+        SearchResults newSearchResults(t_fileName);
+        searchResults.push_back(newSearchResults);
+    }
+}
+
+string searchOutput(string f_DateFrom, string f_DateTo, string f_FileName, string f_SearchFor) {
+    vector<string> fileList;
+    vector<string> filesInDir;
     vector<string> dirList;
+    vector<string> fileNameMatch;
+    searchResults.clear();
     string archiveLoc = "R:\\Archive\\";
+    string fileName;
+
     for (const auto& entry : filesystem::directory_iterator(archiveLoc)) {
         if (filesystem::is_directory(entry)) {
             if ((dirDateYearToIntSearch(entry.path().string()) >= dateYearToIntSearch(f_DateFrom)) && (dirDateYearToIntSearch(entry.path().string()) <= dateYearToIntSearch(f_DateTo))) {
@@ -62,17 +110,38 @@ string searchOutput(string f_DateFrom, string f_DateTo, string f_FileName) {
             }
         }
     }
+    stringstream ss(f_FileName);
+    while (!ss.eof()) {
+        getline(ss, fileName, ';');
+        fileList.push_back(fileName);
+    }
     for (int i = 0; i < dirList.size(); ++i) {
         if (dirFullDateYearToIntSearch(dirList[i]) >= dateFullDateYearToIntSearch(f_DateFrom) && dirFullDateYearToIntSearch(dirList[i]) <= dateFullDateYearToIntSearch(f_DateTo)) {
-        vector<string> fileList
+            for (int k = 0; k < fileList.size(); k++) {
+                fileList[k] = fileList[k] + "*.html";
+                for (const auto& entry : filesystem::directory_iterator(dirList[i])) {
+                    if (entry.is_regular_file()) {
+                        string entryFileName = entry.path().filename().string();
+                        filesInDir.push_back(entryFileName);
+                    }
+                }
+            }
+            for (int k = 0; k < filesInDir.size(); k++) {
+                if (find(fileList.begin(), fileList.end(), filesInDir[k]) != fileList.end()) {
+                    fileNameMatch.push_back(filesInDir[k]);
+                }
+            }
+            for (int k = 0; k < fileNameMatch.size(); k++) {
+                LoadSearchResults(fileNameMatch[k], f_SearchFor);
+            }
         }
     }
 }
 
-    struct Date
-    {
-        int d, m, y;
-    };
+struct Date
+{
+    int d, m, y;
+};
 // To store number of days in all months from January to Dec. 
 const int monthDays[12] = { 31, 28, 31, 30, 31, 30,
                            31, 31, 30, 31, 30, 31 };
@@ -143,4 +212,3 @@ int dateFullDateYearToIntSearch(string t_Date) { //this converts the date to int
     dateFullDateYear = (t_Date[4] - 48) * 10000000 + (t_Date[5] - 48) * 1000000 + (t_Date[6] - 48) * 100000 + (t_Date[7] - 48) * 10000 + (t_Date[0] - 48) * 1000 + (t_Date[1] - 48) * 100 + (t_Date[2] - 48) * 10 + t_Date[3] - 48;
     return dateFullDateYear;
 }
-
