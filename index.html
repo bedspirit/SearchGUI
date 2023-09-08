@@ -11,7 +11,8 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.js"></script>
   <script type='module' src='https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js'></script>
   <script nomodule='' src='https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js'></script>
-  <script src="script.js"></script>
+  <script src="preloader.js"></script>
+  <script src="renderer.js"></script>
   <title>Search</title>
 </head>
 <body>
@@ -46,9 +47,9 @@
 				<label for="toDate">To</label>
 				<style>
 					label {
-					  font-size: 16px; /* Font size in pixels */
-					  font-family: Poppins, sans-serif; /* Font type */
-					  color: #9baacf;
+					font-size: 16px; /* Font size in pixels */
+					font-family: Poppins, sans-serif; /* Font type */
+					color: #9baacf;
 					}
 				</style>
 				<div class=dateP>
@@ -57,8 +58,33 @@
 			</div>
 			<div class="btn btn__primary" id="searchButton">
 				<p>Search</p>
-			</div>			
-			<div id="searchResultsItems"></div>			
+			</div>
+			<div class="loader" id = "loader">
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				</div>
+
+				<div class="loader loader--reflect">
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+			</div>		
+			<div id="searchResultsItems"></div>		
 		</div>
 	</div>
 </body>
